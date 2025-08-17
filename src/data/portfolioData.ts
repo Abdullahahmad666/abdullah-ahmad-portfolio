@@ -13,6 +13,7 @@ export const portfolioData = {
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
+    { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
   ],
   
@@ -88,6 +89,64 @@ export const portfolioData = {
     }
   ],
   
+  // Projects
+  projects: [
+    {
+      id: 1,
+      title: "E-Commerce Platform",
+      description: "A modern React-based e-commerce platform with advanced filtering, shopping cart, and payment integration. Features responsive design and real-time inventory management.",
+      image: "/images/ecommerce-project.jpg",
+      liveUrl: "https://demo-ecommerce.com",
+      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+      category: "Web Development"
+    },
+    {
+      id: 2,
+      title: "Task Management App",
+      description: "Collaborative task management application with real-time updates, team collaboration features, and advanced project tracking capabilities.",
+      image: "/images/task-management.jpg",
+      liveUrl: "https://demo-taskapp.com",
+      technologies: ["React", "TypeScript", "Firebase", "Tailwind"],
+      category: "Web App"
+    },
+    {
+      id: 3,
+      title: "AI-Powered Analytics Dashboard",
+      description: "Interactive analytics dashboard with AI-driven insights, real-time data visualization, and predictive analytics for business intelligence.",
+      image: "/images/analytics-dashboard.jpg",
+      liveUrl: "https://demo-analytics.com",
+      technologies: ["React", "Python", "TensorFlow", "D3.js"],
+      category: "Data Visualization"
+    },
+    {
+      id: 4,
+      title: "Mobile Banking App",
+      description: "Secure mobile banking application with biometric authentication, transaction history, and financial planning tools. Built with React Native.",
+      image: "/images/banking-app.jpg",
+      liveUrl: "https://demo-banking.com",
+      technologies: ["React Native", "Node.js", "PostgreSQL", "JWT"],
+      category: "Mobile Development"
+    },
+    {
+      id: 5,
+      title: "Restaurant Management System",
+      description: "Comprehensive restaurant management system with order tracking, inventory management, and customer relationship features.",
+      image: "/images/restaurant-system.jpg",
+      liveUrl: "https://demo-restaurant.com",
+      technologies: ["React", "Express", "MySQL", "Socket.io"],
+      category: "Business Solutions"
+    },
+    {
+      id: 6,
+      title: "Social Media Platform",
+      description: "Modern social media platform with real-time messaging, content sharing, and advanced privacy controls. Features include stories, posts, and live streaming.",
+      image: "/images/social-platform.jpg",
+      liveUrl: "https://demo-social.com",
+      technologies: ["React", "GraphQL", "MongoDB", "Redis"],
+      category: "Social Network"
+    }
+  ],
+
   // Skills
   skills: [
     { name: "React", level: 95 },
