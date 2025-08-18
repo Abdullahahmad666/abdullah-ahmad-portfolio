@@ -152,17 +152,17 @@ export const portfolioData = {
     { name: "React", level: 95 },
     { name: "TypeScript", level: 90 },
     { name: "Node.js", level: 85 },
-    { name: "Python", level: 80 },
+    { name: "Next.js", level: 80 },
     { name: "AWS", level: 75 },
-    { name: "Design", level: 70 }
+    { name: "Shopify", level: 85 }
   ],
   
   // Stats
   stats: [
-    { label: "Projects Completed", value: "50+" },
-    { label: "Years Experience", value: "5+" },
-    { label: "Happy Clients", value: "30+" },
-    { label: "Code Commits", value: "2000+" }
+    { label: "Projects Completed", value: "10+" },
+    { label: "Years Experience", value: "1+" },
+    { label: "Happy Clients", value: "5+" },
+    { label: "Code Commits", value: "700+" }
   ]
 };
 
