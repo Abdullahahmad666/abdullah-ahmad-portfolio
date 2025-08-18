@@ -108,7 +108,7 @@ export function Footer() {
           className="border-t border-border mt-12 pt-8 text-center"
         >
           <p className="text-sm text-muted-foreground">
-            © {currentYear} {portfolioData.name}. All rights reserved. Built with ❤️ using React & Framer Motion.
+            © {currentYear} {portfolioData.name}. All rights reserved.
           </p>
         </motion.div>
       </div>

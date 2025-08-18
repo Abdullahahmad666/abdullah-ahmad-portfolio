@@ -1,12 +1,12 @@
 export const portfolioData = {
   // Personal Information
-  name: "Alex Johnson",
+  name: "Abdullah Ahmad",
   title: "Full Stack Developer",
   tagline: "Building digital experiences that matter",
-  bio: "I'm a passionate full-stack developer with 5+ years of experience creating modern web applications. I specialize in React, Node.js, and cloud technologies, helping businesses transform their ideas into powerful digital solutions.",
-  location: "San Francisco, CA",
-  email: "alex@example.com",
-  phone: "+1 (555) 123-4567",
+  bio: "I'm a passionate full-stack developer with 1+ years of experience creating modern web applications. I specialize in React, Node.js, and cloud technologies, helping businesses transform their ideas into powerful digital solutions.",
+  location: "Pakistan, Lahore",
+  email: "abdullah.ahmad3579@gmail.com",
+  phone: "+92-332-4331776",
   
   // Navigation
   navigation: [
@@ -21,12 +21,12 @@ export const portfolioData = {
   socialLinks: [
     {
       name: "GitHub",
-      url: "https://github.com",
+      url: "https://github.com/Abdullahahmad666",
       icon: "Github"
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com",
+      url: "https://www.linkedin.com/in/abdullah-ahmad-a00913259/",
       icon: "Linkedin"
     },
     {
