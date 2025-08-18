@@ -91,14 +91,22 @@ export function HeroSection() {
               <Mail className="mr-2 h-4 w-4" />
               Get In Touch
             </Button>
-            <Button
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-              size="lg"
-            >
-              <Download className="mr-2 h-4 w-4" />
-              Download CV
-            </Button>
+            
+              <a
+                  href="https://drive.google.com/file/d/1qqoUKRcYOTlxpXSWh4gq3qIWCb_ngdNI/view?usp=drive_link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    variant="outline"
+                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                    size="lg"
+                  >
+                    <Download className="mr-2 h-4 w-4" />
+                    Download CV
+                  </Button>
+                </a>
+
           </motion.div>
 
           {/* Scroll indicator */}
