@@ -3,114 +3,124 @@ import { portfolioData } from "@/data/portfolioData";
 import * as LucideIcons from "lucide-react";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
+  const [first, second] = portfolioData.name.split(" ");
 
   return (
-    <footer className="bg-card border-t border-border">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <footer
+      style={{
+        background: "#06080E",
+        borderTop: "1px solid rgba(37,99,235,0.12)",
+      }}
+    >
+      <div className="container mx-auto px-5 sm:px-8 py-14">
+        <div className="grid md:grid-cols-3 gap-10 mb-14">
           {/* Brand */}
-          <div className="lg:col-span-1">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-2xl font-bold gradient-text mb-4">
-                {portfolioData.name}
-              </h3>
-              <p className="text-muted-foreground mb-6 max-w-md">
-                {portfolioData.tagline}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Based in {portfolioData.location}
-              </p>
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="font-syne font-black text-2xl mb-3" style={{ color: "#F0F4FF", letterSpacing: "-0.03em" }}>
+              {first[0]}
+              <span style={{ color: "#2563EB" }}>{second[0]}</span>
+              <span style={{ color: "rgba(240,244,255,0.3)" }}>.</span>
+            </p>
+            <p className="text-sm leading-relaxed mb-3" style={{ color: "#7B8EAF" }}>
+              {portfolioData.tagline}
+            </p>
+            <p className="text-xs font-mono-code" style={{ color: "#7B8EAF" }}>
+              {portfolioData.location}
+            </p>
+          </motion.div>
 
-          {/* Quick Links */}
-          <div className="lg:col-span-1">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
-              <nav className="space-y-3">
-                {portfolioData.navigation.map((item) => (
+          {/* Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <p className="font-mono-code text-xs uppercase tracking-widest mb-5" style={{ color: "#7B8EAF" }}>
+              Navigation
+            </p>
+            <nav className="space-y-2.5">
+              {portfolioData.navigation.map((item) => (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  className="block text-sm hover:text-white transition-colors duration-200"
+                  style={{ color: "rgba(240,244,255,0.55)" }}
+                  whileHover={{ x: 4 } as any}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  {item.name}
+                </motion.a>
+              ))}
+            </nav>
+          </motion.div>
+
+          {/* Social + contact */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <p className="font-mono-code text-xs uppercase tracking-widest mb-5" style={{ color: "#7B8EAF" }}>
+              Connect
+            </p>
+            <div className="flex gap-2 mb-6">
+              {portfolioData.socialLinks.map((s) => {
+                const Icon = LucideIcons[s.icon as keyof typeof LucideIcons] as React.ComponentType<{ className?: string }>;
+                return (
                   <motion.a
-                    key={item.name}
-                    href={item.href}
-                    className="block text-muted-foreground hover:text-primary transition-colors"
-                    whileHover={{ x: 5 }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
+                    key={s.name}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.name}
+                    className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors duration-200"
+                    style={{
+                      background: "rgba(37,99,235,0.1)",
+                      border: "1px solid rgba(37,99,235,0.18)",
+                      color: "#93C5FD",
                     }}
+                    whileHover={{ scale: 1.1, y: -2 } as any}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    {item.name}
+                    {Icon && <Icon className="h-4 w-4" />}
                   </motion.a>
-                ))}
-              </nav>
-            </motion.div>
-          </div>
-
-          {/* Social Links */}
-          <div className="lg:col-span-1">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="text-lg font-semibold mb-6">Connect</h4>
-              <div className="flex space-x-4">
-                {portfolioData.socialLinks.map((social) => {
-                  const IconComponent = LucideIcons[social.icon as keyof typeof LucideIcons] as React.ComponentType<any>;
-                  
-                  return (
-                    <motion.a
-                      key={social.name}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 bg-muted hover:bg-primary hover:text-primary-foreground rounded-lg flex items-center justify-center transition-all duration-300"
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {IconComponent && <IconComponent className="h-5 w-5" />}
-                      <span className="sr-only">{social.name}</span>
-                    </motion.a>
-                  );
-                })}
-              </div>
-              
-              <div className="mt-6 space-y-2">
-                <p className="text-sm text-muted-foreground">
-                  <strong>Email:</strong> {portfolioData.email}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  <strong>Phone:</strong> {portfolioData.phone}
-                </p>
-              </div>
-            </motion.div>
-          </div>
+                );
+              })}
+            </div>
+            <div className="space-y-1.5">
+              <p className="text-xs" style={{ color: "rgba(240,244,255,0.45)" }}>
+                {portfolioData.email}
+              </p>
+              <p className="text-xs" style={{ color: "rgba(240,244,255,0.45)" }}>
+                {portfolioData.phone}
+              </p>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Bottom Bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="border-t border-border mt-12 pt-8 text-center"
+        {/* Bottom bar */}
+        <div
+          className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 border-t"
+          style={{ borderColor: "rgba(37,99,235,0.1)" }}
         >
-          <p className="text-sm text-muted-foreground">
-            © {currentYear} {portfolioData.name}. All rights reserved.
+          <p className="text-xs font-mono-code" style={{ color: "rgba(240,244,255,0.3)" }}>
+            © {year} {portfolioData.name}. All rights reserved.
           </p>
-        </motion.div>
+          <p className="text-xs font-mono-code" style={{ color: "rgba(240,244,255,0.2)" }}>
+            Built with React + Three.js
+          </p>
+        </div>
       </div>
     </footer>
   );

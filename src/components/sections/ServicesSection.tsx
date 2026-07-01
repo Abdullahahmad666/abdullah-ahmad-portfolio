@@ -1,126 +1,189 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { motion, useInView } from "framer-motion";
 import { portfolioData } from "@/data/portfolioData";
+import { SectionBackground } from "@/components/SectionBackground";
 import * as LucideIcons from "lucide-react";
 
-export function ServicesSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+const fadeUp = {
+  hidden: { opacity: 0, y: 36 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+};
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
+const CARD_NUMS = ["01", "02", "03", "04", "05", "06"];
+
+/* ─── Service card ────────────────────────────────────────────────────────── */
+function ServiceCard({
+  service,
+  index,
+}: {
+  service: (typeof portfolioData.services)[number];
+  index: number;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const Icon = LucideIcons[
+    service.icon as keyof typeof LucideIcons
+  ] as React.ComponentType<{ className?: string }>;
+
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current || !glowRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    glowRef.current.style.background = `radial-gradient(240px circle at ${x}px ${y}px, rgba(37,99,235,0.18), transparent)`;
+    glowRef.current.style.opacity = "1";
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 }
-    }
+  const onLeave = () => {
+    if (glowRef.current) glowRef.current.style.opacity = "0";
   };
 
   return (
-    <section id="services" className="py-20" ref={ref}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      ref={cardRef}
+      variants={fadeUp}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      className="group relative p-7 rounded-2xl overflow-hidden cursor-default flex flex-col"
+      style={{
+        background: "rgba(8,17,31,0.82)",
+        border: "1px solid rgba(37,99,235,0.14)",
+        minHeight: 280,
+      }}
+      whileHover={{ borderColor: "rgba(37,99,235,0.45)", y: -6 } as any}
+      transition={{ duration: 0.22 }}
+    >
+      {/* Inner spotlight */}
+      <div
+        ref={glowRef}
+        className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-300"
+        style={{ opacity: 0, zIndex: 0 }}
+      />
+
+      {/* Card number — top-right */}
+      <div
+        className="absolute top-5 right-5 font-mono-code text-xs font-medium"
+        style={{ color: "rgba(37,99,235,0.35)", zIndex: 1 }}
+      >
+        {CARD_NUMS[index]}
+      </div>
+
+      {/* Content */}
+      <div className="relative flex flex-col flex-1" style={{ zIndex: 1 }}>
+        {/* Icon */}
+        <div
+          className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300"
+          style={{ background: "var(--gradient-primary)" }}
+        >
+          {Icon && <Icon className="h-4.5 w-4.5 text-white h-5 w-5" />}
+        </div>
+
+        <h3 className="font-syne font-bold text-lg mb-3 leading-snug" style={{ color: "#F0F4FF" }}>
+          {service.title}
+        </h3>
+        <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: "#7B8EAF" }}>
+          {service.description}
+        </p>
+
+        <ul className="space-y-2">
+          {service.features.map((f) => (
+            <li key={f} className="flex items-center gap-2 text-xs" style={{ color: "#7B8EAF" }}>
+              <span
+                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                style={{ background: "#2563EB" }}
+              />
+              {f}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Bottom accent line */}
+      <div
+        className="absolute bottom-0 left-7 right-7 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ background: "var(--gradient-primary)" }}
+      />
+    </motion.div>
+  );
+}
+
+/* ─── Services section ───────────────────────────────────────────────────── */
+export function ServicesSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section id="services" className="relative py-24 md:py-32" ref={ref}>
+      <SectionBackground />
+
+      {/* Large watermark "02" — purely decorative */}
+      <div
+        className="absolute right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none font-syne font-black leading-none"
+        style={{
+          fontSize: "clamp(14rem, 28vw, 26rem)",
+          color: "rgba(37,99,235,0.04)",
+          letterSpacing: "-0.06em",
+          zIndex: 0,
+          lineHeight: 1,
+        }}
+        aria-hidden="true"
+      >
+        02
+      </div>
+
+      <div className="container mx-auto px-5 sm:px-8 relative" style={{ zIndex: 1 }}>
         <motion.div
-          variants={containerVariants}
+          variants={stagger}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {/* Section Header */}
-          <motion.div variants={cardVariants} className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              My <span className="gradient-text">Services</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Comprehensive solutions to bring your digital vision to life
+          {/* Header */}
+          <motion.div variants={fadeUp} className="mb-16 md:mb-20">
+            <p
+              className="font-mono-code text-xs tracking-widest uppercase mb-4"
+              style={{ color: "#2563EB" }}
+            >
+              02 — Services
             </p>
+            <div className="flex items-end gap-6 flex-wrap">
+              <h2
+                className="font-syne font-black text-4xl sm:text-5xl leading-none"
+                style={{ color: "#F0F4FF", letterSpacing: "-0.03em" }}
+              >
+                What I build
+              </h2>
+              <p className="text-sm pb-1" style={{ color: "#7B8EAF", maxWidth: 340 }}>
+                End-to-end solutions — from pixel-perfect interfaces to scalable back-end systems.
+              </p>
+            </div>
           </motion.div>
 
-          {/* Services Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {portfolioData.services.map((service, index) => {
-              const IconComponent = LucideIcons[service.icon as keyof typeof LucideIcons] as React.ComponentType<any>;
-              
-              return (
-                <motion.div key={service.title} variants={cardVariants}>
-                  <Card className="group p-8 h-full glass border-primary/10 hover:border-primary/30 transition-all duration-500 hover:shadow-glow-primary/20 hover:-translate-y-2">
-                    {/* Icon */}
-                    <div className="mb-6">
-                      <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                        {IconComponent && (
-                          <IconComponent className="h-8 w-8 text-white" />
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="space-y-4">
-                      <h3 className="text-xl font-bold group-hover:gradient-text transition-all duration-300">
-                        {service.title}
-                      </h3>
-                      
-                      <p className="text-muted-foreground leading-relaxed">
-                        {service.description}
-                      </p>
-
-                      {/* Features */}
-                      <div className="pt-4">
-                        <h4 className="text-sm font-medium mb-3 text-primary">Key Features:</h4>
-                        <div className="space-y-2">
-                          {service.features.map((feature, featureIndex) => (
-                            <motion.div
-                              key={feature}
-                              initial={{ opacity: 0, x: -20 }}
-                              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                              transition={{ delay: 0.5 + index * 0.1 + featureIndex * 0.05 }}
-                              className="flex items-center space-x-2"
-                            >
-                              <div className="w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0"></div>
-                              <span className="text-sm text-muted-foreground">{feature}</span>
-                            </motion.div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Hover effect overlay */}
-                    <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 rounded-lg transition-opacity duration-500"></div>
-                  </Card>
-                </motion.div>
-              );
-            })}
+          {/* Grid — full width, 2 cols md, 4 cols xl */}
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+            {portfolioData.services.map((service, i) => (
+              <ServiceCard key={service.title} service={service} index={i} />
+            ))}
           </div>
 
-          {/* Call to Action */}
-          <motion.div
-            variants={cardVariants}
-            className="text-center mt-16"
-          >
-            <Card className="p-8 glass border-accent/20 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h3>
-              <p className="text-muted-foreground mb-6">
-                Let's discuss how I can help bring your ideas to life with cutting-edge technology and creative solutions.
-              </p>
-              <motion.button
-                onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-                className="bg-gradient-primary text-white px-8 py-3 rounded-lg font-medium hover:scale-105 transition-transform shadow-glow-primary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Let's Talk
-              </motion.button>
-            </Card>
+          {/* CTA */}
+          <motion.div variants={fadeUp} className="mt-14 flex items-center gap-5 flex-wrap">
+            <motion.button
+              onClick={() =>
+                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="px-8 py-3.5 rounded-full text-sm font-semibold bg-[#2563EB] text-white"
+              whileHover={{ scale: 1.04 } as any}
+              whileTap={{ scale: 0.97 }}
+            >
+              Let's Talk
+            </motion.button>
+            <span className="text-sm" style={{ color: "#7B8EAF" }}>
+              Available for freelance & full-time opportunities
+            </span>
           </motion.div>
         </motion.div>
       </div>
