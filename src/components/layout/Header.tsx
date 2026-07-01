@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { portfolioData } from "@/data/portfolioData";
 
 export function Header() {
@@ -9,106 +8,104 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handle = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handle);
+    return () => window.removeEventListener("scroll", handle);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
-    }
+  const scrollTo = (href: string) => {
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    setIsMobileMenuOpen(false);
   };
+
+  const [first, second] = portfolioData.name.split(" ");
 
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass backdrop-blur-md shadow-lg" : ""
-      }`}
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed top-0 left-0 right-0 z-50"
     >
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="flex-shrink-0"
-          >
+      <div
+        className="transition-all duration-300"
+        style={
+          isScrolled
+            ? {
+                background: "rgba(6,8,14,0.85)",
+                backdropFilter: "blur(14px)",
+                borderBottom: "1px solid rgba(37,99,235,0.12)",
+              }
+            : {}
+        }
+      >
+        <nav className="container mx-auto px-5 sm:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
             <button
-              onClick={() => scrollToSection("#home")}
-              className="text-xl font-bold gradient-text hover:scale-105 transition-transform"
+              onClick={() => scrollTo("#home")}
+              className="font-syne font-black text-lg tracking-tight text-white hover:opacity-80 transition-opacity"
             >
-              {portfolioData.name.split(" ").map((word, index) => (
-                <span key={index}>
-                  {index === 0 ? word : word[0]}
-                  {index === 1 && "."}
-                </span>
-              ))}
+              {first[0]}
+              <span style={{ color: "#2563EB" }}>{second[0]}</span>
+              <span className="text-white/40">.</span>
             </button>
-          </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {portfolioData.navigation.map((item, index) => (
+            {/* Desktop nav */}
+            <div className="hidden md:flex items-center gap-1">
+              {portfolioData.navigation.map((item, i) => (
                 <motion.button
                   key={item.name}
-                  initial={{ opacity: 0, y: -20 }}
+                  initial={{ opacity: 0, y: -12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                  onClick={() => scrollToSection(item.href)}
-                  className="text-muted-foreground hover:text-primary transition-colors duration-200 relative group"
+                  transition={{ delay: 0.25 + i * 0.07 }}
+                  onClick={() => scrollTo(item.href)}
+                  className="relative px-4 py-2 text-sm font-medium group"
+                  style={{ color: "rgba(240,244,255,0.65)" }}
                 >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                  <span className="relative z-10 group-hover:text-white transition-colors duration-200">
+                    {item.name}
+                  </span>
+                  <span className="absolute bottom-1 left-4 right-4 h-px bg-[#2563EB] scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
                 </motion.button>
               ))}
             </div>
-          </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
+            {/* Mobile toggle */}
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-foreground"
+              className="md:hidden text-white/70 hover:text-white transition-colors p-1"
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
           </div>
-        </div>
 
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-border"
-          >
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          {/* Mobile menu */}
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden border-t border-white/10 pb-4"
+            >
               {portfolioData.navigation.map((item) => (
                 <button
                   key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block px-3 py-2 text-muted-foreground hover:text-primary transition-colors w-full text-left"
+                  onClick={() => scrollTo(item.href)}
+                  className="block w-full text-left px-2 py-3 text-sm font-medium hover:text-white transition-colors"
+                  style={{ color: "rgba(240,244,255,0.65)" }}
                 >
                   {item.name}
                 </button>
               ))}
-            </div>
-          </motion.div>
-        )}
-      </nav>
+            </motion.div>
+          )}
+        </nav>
+      </div>
     </motion.header>
   );
 }
