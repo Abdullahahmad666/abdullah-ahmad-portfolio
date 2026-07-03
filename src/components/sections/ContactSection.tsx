@@ -4,17 +4,20 @@ import {
   useInView,
   useMotionValue,
   useSpring,
+  type Variants,
 } from "framer-motion";
 import { Mail, Phone, MapPin, Send, Github, Linkedin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { portfolioData } from "@/data/portfolioData";
 import { SectionBackground } from "@/components/SectionBackground";
 
-const fadeUp = {
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 36 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
 };
-const stagger = {
+const stagger: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
 };
@@ -165,7 +168,7 @@ export function ContactSection() {
       <SectionBackground orbColor="#1D4ED8" />
 
       {/* Watermark */}
-      <div
+      {/* <div
         className="absolute left-0 top-1/2 -translate-y-1/2 select-none pointer-events-none font-syne font-black leading-none"
         style={{
           fontSize: "clamp(14rem, 28vw, 26rem)",
@@ -176,8 +179,8 @@ export function ContactSection() {
         }}
         aria-hidden="true"
       >
-        05
-      </div>
+        AA
+      </div> */}
 
       <div className="container mx-auto px-5 sm:px-8 relative" style={{ zIndex: 1 }}>
         <motion.div

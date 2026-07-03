@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, type Variants } from "framer-motion";
 import { Star } from "lucide-react";
 import { portfolioData } from "@/data/portfolioData";
 import { SectionBackground } from "@/components/SectionBackground";
@@ -150,11 +150,13 @@ function AnimatedCard({
 }
 
 /* ─── Static card for mobile ──────────────────────────────────────────────── */
-const fadeUp = {
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const fadeUp: Variants = {
   hidden:  { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
 };
-const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.11 } } };
+const stagger: Variants = { hidden: {}, visible: { transition: { staggerChildren: 0.11 } } };
 
 function StaticCard({ testimonial }: { testimonial: (typeof portfolioData.testimonials)[number] }) {
   const cardRef = useRef<HTMLDivElement>(null);

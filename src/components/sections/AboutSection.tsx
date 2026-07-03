@@ -1,13 +1,15 @@
 import { useRef } from "react";
-import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useInView, useMotionValue, useSpring, useTransform, type Variants } from "framer-motion";
 import { portfolioData } from "@/data/portfolioData";
 import { SectionBackground } from "@/components/SectionBackground";
 
-const fadeUp = {
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 36 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
 };
-const stagger = {
+const stagger: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
 };
@@ -142,11 +144,8 @@ function ProfileCard() {
 
             {/* Bottom area — stats row */}
             <div
-              className="grid grid-cols-3 divide-x"
-              style={{
-                borderTop: "1px solid rgba(37,99,235,0.15)",
-                divideColor: "rgba(37,99,235,0.15)",
-              }}
+              className="grid grid-cols-3 divide-x divide-[rgba(37,99,235,0.15)]"
+              style={{ borderTop: "1px solid rgba(37,99,235,0.15)" }}
             >
               {portfolioData.stats.slice(0, 3).map((stat) => (
                 <div
