@@ -3,7 +3,7 @@ export const portfolioData = {
   name: "Abdullah Ahmad",
   title: "Full Stack Developer",
   tagline: "Building digital experiences that matter",
-  bio: "I'm a passionate full-stack developer with 1+ years of experience creating modern web applications. I specialize in React, Node.js, and cloud technologies, helping businesses transform their ideas into powerful digital solutions.",
+  bio: "I'm a passionate full-stack developer with 2+ years of experience creating modern web applications. I specialize in React, Node.js, and cloud technologies, helping businesses transform their ideas into powerful digital solutions.",
   location: "Pakistan, Lahore",
   email: "abdullah.ahmad3579@gmail.com",
   phone: "+92-332-4331776",
@@ -95,10 +95,10 @@ export const portfolioData = {
     {
       id: 1,
       title: "E-Commerce Platform",
-      description: "A modern React-based e-commerce platform with advanced filtering, shopping cart, and payment integration. Features responsive design and real-time inventory management.",
+      description: "A modern Shopify-based e-commerce platform with advanced filtering, shopping cart, and payment integration. Features responsive design and real-time inventory management.",
       image: "/images/ecommerce-project.jpg",
-      liveUrl: "https://demo-ecommerce.com",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+      liveUrl: "https://rangza.net",
+      technologies: ["LIQUID", "HTML", "CSS", "SHOPIFY"],
       category: "Web Development"
     },
     {
@@ -197,8 +197,8 @@ export const portfolioData = {
   // Stats
   stats: [
     { label: "Projects Completed", value: "10+" },
-    { label: "Years Experience", value: "1+" },
-    { label: "Happy Clients", value: "5+" },
+    { label: "Years Experience", value: "2+" },
+    { label: "Happy Clients", value: "7+" },
     { label: "Code Commits", value: "700+" }
   ]
 };
