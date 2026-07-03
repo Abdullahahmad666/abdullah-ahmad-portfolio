@@ -1,19 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Dark background -->
-  <rect width="32" height="32" rx="7" fill="#06080E"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" rx="18" fill="#06080E"/>
   <!-- Subtle cobalt border -->
-  <rect width="32" height="32" rx="7" fill="none" stroke="#2563EB" stroke-width="1" stroke-opacity="0.35"/>
-  <!-- Subtle cobalt glow -->
-  <circle cx="16" cy="14" r="11" fill="#2563EB" fill-opacity="0.07"/>
+  <rect width="100" height="100" rx="18" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-opacity="0.35"/>
+  <!-- Soft cobalt glow behind letters -->
+  <ellipse cx="50" cy="52" rx="34" ry="26" fill="#2563EB" fill-opacity="0.08"/>
   <!-- AA monogram: cobalt A + amber A -->
   <text
-    x="16"
-    y="23"
+    x="50"
+    y="72"
     text-anchor="middle"
-    font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif"
+    font-family="'Arial Black', 'Arial Bold', Arial, 'Helvetica Neue', sans-serif"
     font-weight="900"
-    font-size="18"
-    letter-spacing="-1"
+    font-size="54"
+    letter-spacing="-3"
   >
     <tspan fill="#2563EB">A</tspan><tspan fill="#F59E0B">A</tspan>
   </text>
