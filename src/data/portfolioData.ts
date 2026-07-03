@@ -14,6 +14,7 @@ export const portfolioData = {
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
     { name: "Projects", href: "#projects" },
+    { name: "Testimonials", href: "#testimonials" },
     { name: "Contact", href: "#contact" },
   ],
   
@@ -157,6 +158,42 @@ export const portfolioData = {
     { name: "Shopify", level: 85 }
   ],
   
+  // Testimonials
+  testimonials: [
+    {
+      name: "Sarah Mitchell",
+      role: "Product Manager",
+      company: "TechCorp",
+      initials: "SM",
+      rating: 5,
+      text: "Abdullah delivered an exceptional e-commerce platform that exceeded all expectations. His attention to detail and ability to turn complex requirements into clean, working code is genuinely impressive.",
+    },
+    {
+      name: "James Chen",
+      role: "CTO",
+      company: "StartupXYZ",
+      initials: "JC",
+      rating: 5,
+      text: "Working with Abdullah was a pleasure from start to finish. He built our entire backend API from scratch — clean, scalable, and delivered ahead of schedule. Would hire again without hesitation.",
+    },
+    {
+      name: "Aisha Rahman",
+      role: "Founder",
+      company: "DesignHub",
+      initials: "AR",
+      rating: 5,
+      text: "Abdullah transformed our outdated website into a modern, high-performance platform. Our conversion rate jumped 40% in the first month. He's the rare developer who understands both code and product.",
+    },
+    {
+      name: "Marcus Webb",
+      role: "Lead Developer",
+      company: "AgencyBlue",
+      initials: "MW",
+      rating: 5,
+      text: "Exceptional React knowledge, clean architecture, and fast turnaround. Abdullah is my first call for complex frontend work. He communicates clearly and never disappears mid-project.",
+    },
+  ],
+
   // Stats
   stats: [
     { label: "Projects Completed", value: "10+" },

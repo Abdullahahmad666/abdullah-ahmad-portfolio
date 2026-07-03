@@ -43,7 +43,7 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <p className="font-mono-code text-xs uppercase tracking-widest mb-5" style={{ color: "#7B8EAF" }}>
-              Navigation
+              Explore
             </p>
             <nav className="space-y-2.5">
               {portfolioData.navigation.map((item) => (
@@ -116,9 +116,6 @@ export function Footer() {
         >
           <p className="text-xs font-mono-code" style={{ color: "rgba(240,244,255,0.3)" }}>
             © {year} {portfolioData.name}. All rights reserved.
-          </p>
-          <p className="text-xs font-mono-code" style={{ color: "rgba(240,244,255,0.2)" }}>
-            Built with React + Three.js
           </p>
         </div>
       </div>

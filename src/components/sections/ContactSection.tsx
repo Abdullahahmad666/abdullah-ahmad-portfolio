@@ -176,7 +176,7 @@ export function ContactSection() {
         }}
         aria-hidden="true"
       >
-        04
+        05
       </div>
 
       <div className="container mx-auto px-5 sm:px-8 relative" style={{ zIndex: 1 }}>
@@ -191,7 +191,7 @@ export function ContactSection() {
               className="font-mono-code text-xs tracking-widest uppercase mb-4"
               style={{ color: "#2563EB" }}
             >
-              04 — Contact
+              05 — Contact
             </p>
             <div className="flex items-end gap-6 flex-wrap">
               <h2
